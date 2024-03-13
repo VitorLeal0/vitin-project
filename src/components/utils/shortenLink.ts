@@ -8,10 +8,10 @@ import { insertShortenLink } from "../data/insertShortenLink"
 export function ShortenLink (link: string): string {
   const host = import.meta.env.VITE_URL
   const id: string = uuid()
-  const ShortenedLink = `${host}/${id}`
+  const shortenedLink = `${host}/${id}`
   
   insertShortenLink(link,id)
 
-  return ShortenedLink
+  return shortenedLink
 }
 
