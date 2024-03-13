@@ -1,9 +1,14 @@
-import React from "react"
-
-interface ButtonProps{
-  children:React.ReactNode;
+interface ButtonProps  {
+   children: React.ReactNode; 
+   onPress: ()=>void; 
 }
 
-export default function BtnGenerateLink({children}:ButtonProps){
-  return<button>{children}</button>
+export default function BtnGenerateLink({children,onPress}:ButtonProps){
+  return(
+  <button 
+      onClick={()=> onPress()}
+    >
+      {children}
+  </button>
+  )
 }
