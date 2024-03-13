@@ -3,11 +3,13 @@ import InputOriginalLink from './components/InputOriginalLink'
 import Button from './components/Button'
 import { ShortenLink } from './components/utils/shortenLink'
 import { getRedirectLink } from './components/data/getRedirectLink'
+import InputCustomLink from './components/InputCustomLink'
 
 
 function App() {
   const [shortLinkState, setShortenLinkState] = useState("")
   const [originalLinkState, setOriginalLinkState] = useState("")
+  const [customLink, setCustomLink] = useState("")
   const actual_url = window.location.pathname
 
 
@@ -15,26 +17,31 @@ function App() {
     <>
       {actual_url !== "/" ? (<Button onPress={async () => {
         const link = await getRedirectLink(actual_url.slice(1));
-        console.log("actual url ",actual_url)
-        console.log("link no app", link)
+
         window.location.href=link?.data().linkToRedirect
       }} >Acesse o Link</Button>) :
         <div>
           <h1>Vitin</h1>
+          
           <InputOriginalLink
             placeholder="seu link aqui"
             onChange={(e) => {
               setOriginalLinkState(e.target.value)
             }}
           />
-
+          <InputCustomLink 
+            placeholder='link personalizado' 
+            onChange={(custom) => {
+              setCustomLink(custom.target.value)
+            }}/>
           <Button
-            onPress={() => {
-              setShortenLinkState(ShortenLink(originalLinkState))
+            onPress={async () => {
+              setShortenLinkState(await ShortenLink(originalLinkState,customLink))
             }}
           >Encurtar
           </Button>
-          <p>{shortLinkState}</p>
+          <br/><br/>
+          <span>{shortLinkState}</span>
         </div>
       }
     </>

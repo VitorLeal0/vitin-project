@@ -1,17 +1,31 @@
-import {
-  v4 as uuid 
-} from "uuid"
+import { v4 as uuid } from "uuid"
 import { insertShortenLink } from "../data/insertShortenLink"
+import removeSpaces from "./removeSpaces"
+import { verifyCustomExist } from "../data/verifyCustomExist"
 
 
 
-export function ShortenLink (link: string): string {
+export async function ShortenLink (link: string, customLink: string): Promise<string> {
   const host = import.meta.env.VITE_URL
-  const id: string = uuid()
+  
+  let id: string
+  customLink=removeSpaces(customLink)
+
+  if (customLink === ''){
+    id = uuid()
+   
+   } else { 
+    id = customLink
+  }
+
   const shortenedLink = `${host}/${id}`
   
-  insertShortenLink(link,id)
+  if ( await verifyCustomExist(id) === false ){
+    insertShortenLink(link,id)
+    return shortenedLink
+  } else{
+    return "URL Personalizada já existe \n Tente inserir outro termo"    
+  }
 
-  return shortenedLink
 }
 
