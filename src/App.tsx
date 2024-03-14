@@ -4,6 +4,9 @@ import Button from './components/Button'
 import { ShortenLink } from './components/utils/shortenLink'
 import { getRedirectLink } from './components/data/getRedirectLink'
 import InputCustomLink from './components/InputCustomLink'
+import "./App.scss"
+import CopyGeneratedLinkButton from './components/CopyGeneratedLinkButtom'
+import copyLink from './components/utils/copyLink'
 
 
 function App() {
@@ -15,26 +18,32 @@ function App() {
 
   return (
     <>
-      {actual_url !== "/" ? (<Button onPress={async () => {
+      <div className='container'>
+      {actual_url !== "/" ? (<Button 
+      className='clickButton'
+      onPress={async () => {
         const link = await getRedirectLink(actual_url.slice(1));
 
         window.location.href=link?.data().linkToRedirect
       }} >Acesse o Link</Button>) :
         <div>
-          <h1>Vitin</h1>
+          <h1 className='title'>Vitin</h1>
           
           <InputOriginalLink
+            className='enterLink'
             placeholder="seu link aqui"
             onChange={(e) => {
               setOriginalLinkState(e.target.value)
             }}
           />
           <InputCustomLink 
+            className='enterLink'
             placeholder='link personalizado' 
             onChange={(custom) => {
               setCustomLink(custom.target.value)
             }}/>
           <Button
+            className='clickButton'
             onPress={async () => {
               setShortenLinkState(await ShortenLink(originalLinkState,customLink))
             }}
@@ -42,8 +51,19 @@ function App() {
           </Button>
           <br/><br/>
           <span>{shortLinkState}</span>
+          {(shortLinkState === '' || !shortLinkState.startsWith(import.meta.env.VITE_URL)) ? <></>:          
+          <CopyGeneratedLinkButton
+            className='clickButton'
+            onPress={async () => { copyLink(shortLinkState)
+            }}
+            >
+            Copiar
+          </CopyGeneratedLinkButton> }
+          
+
         </div>
       }
+    </div>
     </>
   )
 }
