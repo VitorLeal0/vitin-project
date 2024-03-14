@@ -1,7 +1,7 @@
-import { v4 as uuid } from "uuid"
 import { insertShortenLink } from "../data/insertShortenLink"
 import removeSpaces from "./removeSpaces"
 import { verifyCustomExist } from "../data/verifyCustomExist"
+import ShortUniqueId from 'short-unique-id';
 
 
 
@@ -12,7 +12,8 @@ export async function ShortenLink (link: string, customLink: string): Promise<st
     customLink=removeSpaces(customLink)
 
     if (customLink === ''){
-      id = uuid()
+      const uid = new ShortUniqueId({ length: 10 });
+      id =uid.rnd()
     
     } else { 
       id = customLink
