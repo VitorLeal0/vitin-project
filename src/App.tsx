@@ -51,6 +51,7 @@ function App() {
           </Button>
           <br/><br/>
           <span>{shortLinkState}</span>
+          <br/><br/>
           {(shortLinkState === '' || !shortLinkState.startsWith(import.meta.env.VITE_URL)) ? <></>:          
           <CopyGeneratedLinkButton
             className='clickButton'
