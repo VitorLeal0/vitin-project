@@ -27,7 +27,7 @@ export async function ShortenLink (link: string, customLink: string): Promise<st
     } else{
       return "URL Personalizada já existe \n Tente inserir outro termo"    
     }
-  } else return "Insira uma url"
+  } else return "Insira um link para encurtar"
 
 }
 

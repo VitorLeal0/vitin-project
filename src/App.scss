@@ -42,6 +42,7 @@ body {
   border-radius: 4px;
   transition: background-color 0.3s;
   box-sizing: border-box; 
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
 
   &:hover {
     background-color: darken($accent, 10%);
@@ -60,6 +61,7 @@ body {
   border-radius: 4px;
   transition: background-color 0.3s;
   box-sizing: border-box; 
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
 
   &:hover {
     background-color: darken($success, 10%);
@@ -74,10 +76,15 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
 }
 
 .short-link {
   margin-top: 20px;
   display: block;
   font-size: 18px;
+}
+
+.logo{
+  max-height: 200px;
 }

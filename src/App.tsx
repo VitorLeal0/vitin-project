@@ -19,15 +19,20 @@ function App() {
   return (
     <>
       <div className='container'>
-      {actual_url !== "/" ? (<Button 
+      {actual_url !== "/" ? 
+      (<Button 
       className='clickButton'
-      onPress={async () => {
+      onPress={async () => 
+        {
         const link = await getRedirectLink(actual_url.slice(1));
 
         window.location.href=link?.data().linkToRedirect
-      }} >Acesse o Link</Button>) :
+      }} >
+        Acesse o Link</Button>)
+         :
         <div>
-          <h1 className='title'>Vitin</h1>
+          {/* <h1 className='title'>Vitin</h1> */}
+          <img src='../public/logo.png'  alt="Vitin" className='logo' />
           
           <InputOriginalLink
             className='enterLink'
